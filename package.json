@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "server": "cd server && pnpm run dev",
+    "frontend": "cd frontend && pnpm run dev",
+    "server:build": "cd server && pnpm run build",
+    "frontend:build": "cd frontend && pnpm run build",
+    "server:install": "cd server && pnpm install",
+    "frontend:install": "cd frontend && pnpm install"
+  }
+}
