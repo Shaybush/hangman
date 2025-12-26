@@ -14,7 +14,7 @@ const port = env.PORT;
 app.use(helmet()); // Security headers
 app.use(cors({
   origin: env.NODE_ENV === 'production'
-    ? process.env.FRONTEND_URL
+    ? env.FRONTEND_URL
     : [
       'http://localhost:3000', 'http://localhost:3001',
       'http://localhost:5173', 'http://localhost:5174', // Vite default ports

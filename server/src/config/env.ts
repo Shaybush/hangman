@@ -8,6 +8,7 @@ dotenv.config();
 export const env = {
     NODE_ENV: process.env.NODE_ENV || 'development',
     PORT: parseInt(process.env.PORT || '5001', 10),
+    FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:3000',
 };
 
 // Log environment status (without showing actual API keys)
@@ -16,6 +17,7 @@ export const logEnvStatus = (): void => {
         meta: {
             NODE_ENV: env.NODE_ENV,
             PORT: env.PORT,
+            FRONTEND_URL: env.FRONTEND_URL,
         }
     });
 }; 
