@@ -38,6 +38,8 @@ class HangmanService {
       }
     }
 
+    // abra kadbra
+
     return {
       isCorrect: positions.length > 0,
       positions

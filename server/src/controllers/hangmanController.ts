@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import logger from '../utils/logger';
 import hangmanService from '../services/hangmanService';
 
@@ -6,7 +6,7 @@ import hangmanService from '../services/hangmanService';
  * Get a random word for hangman game
  * GET /api/hangman/word
  */
-export const getWord = (_req: Request, res: Response): void => {
+export const getWord = (_req: Request, res: Response, next: NextFunction): void => {
   try {
     const word = hangmanService.getRandomWord();
 
@@ -25,14 +25,7 @@ export const getWord = (_req: Request, res: Response): void => {
       }
     });
   } catch (error) {
-    logger.error('Error generating hangman word', {
-      error: error instanceof Error ? error.message : 'Unknown error'
-    });
-
-    res.status(500).json({
-      success: false,
-      error: 'Failed to generate word'
-    });
+    next(error);
   }
 };
 
@@ -40,7 +33,7 @@ export const getWord = (_req: Request, res: Response): void => {
  * Validate a letter guess
  * POST /api/hangman/validate-guess
  */
-export const validateGuess = (req: Request, res: Response): void => {
+export const validateGuess = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const { word, guess } = req.body;
 
@@ -86,13 +79,6 @@ export const validateGuess = (req: Request, res: Response): void => {
       data: result
     });
   } catch (error) {
-    logger.error('Error validating hangman guess', {
-      error: error instanceof Error ? error.message : 'Unknown error'
-    });
-
-    res.status(500).json({
-      success: false,
-      error: 'Failed to validate guess'
-    });
+    next(error);
   }
 };

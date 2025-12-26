@@ -26,10 +26,7 @@ app.use(cors({
 app.use(express.json());
 app.use(logRequest); // Log all requests
 
-// Health routes (public)
 app.use('/api/health', healthRoutes);
-
-// Hangman game routes (public)
 app.use('/api/hangman', hangmanRoutes);
 
 // Error handling

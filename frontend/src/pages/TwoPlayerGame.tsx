@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useHangmanGame } from '../hooks/useHangmanGame';
-import { useKeyboardInput } from '../hooks/useKeyboardInput';
-import { useTwoPlayerContext } from '../context/TwoPlayerContext';
-import { HangmanVisual } from '../components/HangmanVisual';
-import { WordDisplay } from '../components/WordDisplay';
-import { LetterKeyboard } from '../components/LetterKeyboard';
-import { AttemptsDisplay } from '../components/AttemptsDisplay';
-import { Scoreboard } from '../components/Scoreboard';
-import { RoundTransition } from '../components/RoundTransition';
-import { FinalScoreModal } from '../components/FinalScoreModal';
-import styles from './TwoPlayerGame.module.css';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { useHangmanGame } from "../hooks/useHangmanGame";
+import { useKeyboardInput } from "../hooks/useKeyboardInput";
+import { useTwoPlayerContext } from "../context/TwoPlayerContext";
+import { HangmanVisual } from "../components/HangmanVisual";
+import { WordDisplay } from "../components/WordDisplay";
+import { LetterKeyboard } from "../components/LetterKeyboard";
+import { AttemptsDisplay } from "../components/AttemptsDisplay";
+import { Scoreboard } from "../components/Scoreboard";
+import { RoundTransition } from "../components/RoundTransition";
+import { FinalScoreModal } from "../components/FinalScoreModal";
+import styles from "./TwoPlayerGame.module.css";
 
-type GamePhase = 'playing' | 'transition' | 'ended';
+type GamePhase = "playing" | "transition" | "ended";
 
 export function TwoPlayerGame() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export function TwoPlayerGame() {
     incrementScore,
     switchPlayer,
     incrementRound,
-    resetGame: resetTwoPlayerGame
+    resetGame: resetTwoPlayerGame,
   } = useTwoPlayerContext();
 
   const {
@@ -32,11 +32,9 @@ export function TwoPlayerGame() {
     startGame,
     makeGuess,
     resetGame: resetHangmanGame,
-    getCorrectLetters,
-    getIncorrectLetters
   } = useHangmanGame();
 
-  const [gamePhase, setGamePhase] = useState<GamePhase>('playing');
+  const [gamePhase, setGamePhase] = useState<GamePhase>("playing");
   const [previousResult, setPreviousResult] = useState<{
     won: boolean;
     playerName: string;
@@ -50,27 +48,35 @@ export function TwoPlayerGame() {
 
   // Handle round end (win or lose)
   useEffect(() => {
-    if (gameState.gameStatus === 'won' || gameState.gameStatus === 'lost') {
-      const currentPlayerName = twoPlayerState.currentPlayer === 1
-        ? twoPlayerState.player1.name
-        : twoPlayerState.player2.name;
+    if (gameState.gameStatus === "won" || gameState.gameStatus === "lost") {
+      const currentPlayerName =
+        twoPlayerState.currentPlayer === 1
+          ? twoPlayerState.player1.name
+          : twoPlayerState.player2.name;
 
       // Award point if won
-      if (gameState.gameStatus === 'won') {
+      if (gameState.gameStatus === "won") {
         incrementScore(twoPlayerState.currentPlayer);
       }
 
       // Store result for transition screen
       setPreviousResult({
-        won: gameState.gameStatus === 'won',
+        won: gameState.gameStatus === "won",
         playerName: currentPlayerName,
-        word: gameState.word
+        word: gameState.word,
       });
 
       // Show transition
-      setGamePhase('transition');
+      setGamePhase("transition");
     }
-  }, [gameState.gameStatus, gameState.word, twoPlayerState.currentPlayer, twoPlayerState.player1.name, twoPlayerState.player2.name, incrementScore]);
+  }, [
+    gameState.gameStatus,
+    gameState.word,
+    twoPlayerState.currentPlayer,
+    twoPlayerState.player1.name,
+    twoPlayerState.player2.name,
+    incrementScore,
+  ]);
 
   const handleContinue = () => {
     // Switch to next player
@@ -82,22 +88,22 @@ export function TwoPlayerGame() {
     startGame();
 
     // Return to playing phase
-    setGamePhase('playing');
+    setGamePhase("playing");
     setPreviousResult(null);
   };
 
   const handleEndGame = () => {
-    setGamePhase('ended');
+    setGamePhase("ended");
   };
 
   const handlePlayAgain = () => {
     resetTwoPlayerGame();
-    navigate('/hangman/two-player/setup');
+    navigate("/hangman/two-player/setup");
   };
 
   const handleMainMenu = () => {
     resetTwoPlayerGame();
-    navigate('/hangman');
+    navigate("/hangman");
   };
 
   const getCurrentPlayerName = () => {
@@ -112,20 +118,16 @@ export function TwoPlayerGame() {
       : twoPlayerState.player1.name;
   };
 
-  const isRoundOver = gameState.gameStatus !== 'playing';
+  const isRoundOver = gameState.gameStatus !== "playing";
 
   // Enable keyboard input when round is active and not guessing
   useKeyboardInput({
     onKeyPress: makeGuess,
-    disabled: isRoundOver || isLoading || gamePhase !== 'playing' || isGuessing
+    disabled: isRoundOver || isLoading || gamePhase !== "playing" || isGuessing,
   });
 
   if (isLoading) {
-    return (
-      <div className={styles.loadingContainer}>
-        Loading...
-      </div>
-    );
+    return <div className={styles.loadingContainer}>Loading...</div>;
   }
 
   if (error) {
@@ -160,7 +162,9 @@ export function TwoPlayerGame() {
 
       <div className={styles.currentPlayerBanner}>
         <span className={styles.currentPlayerLabel}>Now Playing:</span>
-        <span className={styles.currentPlayerName}>{getCurrentPlayerName()}</span>
+        <span className={styles.currentPlayerName}>
+          {getCurrentPlayerName()}
+        </span>
       </div>
 
       <div className={styles.gameArea}>
@@ -186,19 +190,14 @@ export function TwoPlayerGame() {
             />
 
             {isGuessing && (
-              <div className={styles.checkingIndicator}>
-                Checking...
-              </div>
+              <div className={styles.checkingIndicator}>Checking...</div>
             )}
           </>
         )}
       </div>
 
       <div className={styles.endGameContainer}>
-        <button
-          className="btn btn-error"
-          onClick={handleEndGame}
-        >
+        <button className="btn btn-error" onClick={handleEndGame}>
           End Game
         </button>
       </div>
@@ -206,7 +205,7 @@ export function TwoPlayerGame() {
       {/* Round Transition Modal */}
       {previousResult && (
         <RoundTransition
-          isOpen={gamePhase === 'transition'}
+          isOpen={gamePhase === "transition"}
           previousPlayerWon={previousResult.won}
           previousPlayerName={previousResult.playerName}
           nextPlayerName={getNextPlayerName()}
@@ -217,7 +216,7 @@ export function TwoPlayerGame() {
 
       {/* Final Score Modal */}
       <FinalScoreModal
-        isOpen={gamePhase === 'ended'}
+        isOpen={gamePhase === "ended"}
         player1Name={twoPlayerState.player1.name}
         player1Score={twoPlayerState.player1.score}
         player2Name={twoPlayerState.player2.name}

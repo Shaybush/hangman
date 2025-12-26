@@ -1,9 +1,13 @@
 import { createBrowserRouter } from "react-router";
 import { RootLayout } from "./layouts/RootLayout";
-import { MainMenu } from "./pages/MainMenu";
 import { SinglePlayerGame } from "./pages/SinglePlayerGame";
 import { TwoPlayerSetup } from "./pages/TwoPlayerSetup";
 import { TwoPlayerGame } from "./pages/TwoPlayerGame";
+import { lazy } from "react";
+
+const MainMenu = lazy(() =>
+  import("./pages/MainMenu").then((module) => ({ default: module.MainMenu }))
+);
 
 export const router = createBrowserRouter([
   {
