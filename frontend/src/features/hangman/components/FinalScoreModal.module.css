@@ -1,0 +1,102 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--color-text);
+}
+
+.winnerAnnouncement {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-success);
+  margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.scoresContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+}
+
+.playerScore {
+  background-color: var(--color-bg-light);
+  border-radius: 10px;
+  padding: 25px 35px;
+  min-width: 180px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.playerScore.winner {
+  background-color: rgba(76, 175, 80, 0.15);
+  border: 2px solid var(--color-success);
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(76, 175, 80, 0.3);
+}
+
+.playerName {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.score {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: 5px;
+}
+
+.winner .score {
+  color: var(--color-success);
+}
+
+.label {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.versus {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-text-light);
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

@@ -3,9 +3,7 @@ import { RootLayout } from "./layouts/RootLayout";
 import { MainMenu } from "./features/hangman/pages/MainMenu";
 import { SinglePlayerGame } from "./features/hangman/pages/SinglePlayerGame";
 import { TwoPlayerSetup } from "./features/hangman/pages/TwoPlayerSetup";
-
-// Placeholder component for Phase 6
-const TwoPlayerGame = () => <div>Two Player Game (Coming Soon)</div>;
+import { TwoPlayerGame } from "./features/hangman/pages/TwoPlayerGame";
 
 export const router = createBrowserRouter([
   {

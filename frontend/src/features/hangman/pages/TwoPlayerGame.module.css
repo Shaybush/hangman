@@ -1,0 +1,108 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  background: var(--gradient-menu);
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.5rem;
+  color: var(--color-white);
+  background: var(--gradient-menu);
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 20px;
+  background: var(--gradient-menu);
+}
+
+.errorMessage {
+  color: var(--color-error);
+  font-size: 1.2rem;
+  background: var(--color-white);
+  padding: 15px 25px;
+  border-radius: 8px;
+}
+
+.currentPlayerBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-white);
+  padding: 12px 24px;
+  border-radius: 25px;
+  margin: 15px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.currentPlayerLabel {
+  color: var(--color-text-light);
+  font-size: 1rem;
+}
+
+.currentPlayerName {
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.endGameContainer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .currentPlayerBanner {
+    padding: 10px 20px;
+  }
+
+  .currentPlayerName {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .currentPlayerBanner {
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 15px;
+  }
+
+  .currentPlayerLabel {
+    font-size: 0.9rem;
+  }
+
+  .currentPlayerName {
+    font-size: 1rem;
+  }
+
+  .endGameContainer {
+    margin-top: 20px;
+    padding-top: 15px;
+  }
+}

@@ -4,3 +4,6 @@ export { LetterKeyboard } from './LetterKeyboard';
 export { UsedLetters } from './UsedLetters';
 export { WordDisplay } from './WordDisplay';
 export { GameOverModal } from './GameOverModal';
+export { Scoreboard } from './Scoreboard';
+export { RoundTransition } from './RoundTransition';
+export { FinalScoreModal } from './FinalScoreModal';
