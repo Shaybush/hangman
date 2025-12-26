@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
 import type { TwoPlayerState, Player } from '../types';
 
 interface TwoPlayerContextValue {
@@ -37,15 +37,15 @@ export function TwoPlayerProvider(props: TwoPlayerProviderProps) {
   const { children } = props;
   const [state, setState] = useState<TwoPlayerState>(initialState);
 
-  const setPlayerNames = (player1Name: string, player2Name: string) => {
+  const setPlayerNames = useCallback((player1Name: string, player2Name: string) => {
     setState((prev) => ({
       ...prev,
       player1: { ...prev.player1, name: player1Name || 'Player 1' },
       player2: { ...prev.player2, name: player2Name || 'Player 2' },
     }));
-  };
+  }, []);
 
-  const incrementScore = (player: 1 | 2) => {
+  const incrementScore = useCallback((player: 1 | 2) => {
     setState((prev) => {
       const playerKey = player === 1 ? 'player1' : 'player2';
       return {
@@ -56,25 +56,25 @@ export function TwoPlayerProvider(props: TwoPlayerProviderProps) {
         },
       };
     });
-  };
+  }, []);
 
-  const switchPlayer = () => {
+  const switchPlayer = useCallback(() => {
     setState((prev) => ({
       ...prev,
       currentPlayer: prev.currentPlayer === 1 ? 2 : 1,
     }));
-  };
+  }, []);
 
-  const incrementRound = () => {
+  const incrementRound = useCallback(() => {
     setState((prev) => ({
       ...prev,
       roundNumber: prev.roundNumber + 1,
     }));
-  };
+  }, []);
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     setState(initialState);
-  };
+  }, []);
 
   const value: TwoPlayerContextValue = {
     state,

@@ -1,6 +1,7 @@
 # Hangman Game Implementation Plan
 
 ## Project Overview
+
 Build a Hangman game with single-player and two-player competitive modes using React (Vite) frontend and Node.js Express backend.
 
 **Key Architecture Decision**: The game will be implemented as a new feature module within the existing Devora project, maintaining clear client-server separation.
@@ -10,16 +11,17 @@ Build a Hangman game with single-player and two-player competitive modes using R
 ## CSS Conventions (IMPORTANT - All phases must follow)
 
 ### Global CSS Variables (defined in `frontend/src/index.css`)
+
 All colors MUST use these CSS variables - do NOT add hardcoded colors:
 
 ```css
 /* Core Colors */
---color-success: #4CAF50;
+--color-success: #4caf50;
 --color-success-hover: #45a049;
 --color-error: #f44336;
 --color-error-hover: #d32f2f;
---color-primary: #2196F3;
---color-primary-hover: #1976D2;
+--color-primary: #2196f3;
+--color-primary-hover: #1976d2;
 --color-warning: #ff9800;
 --color-warning-hover: #f57c00;
 
@@ -33,17 +35,20 @@ All colors MUST use these CSS variables - do NOT add hardcoded colors:
 --color-overlay: rgba(0, 0, 0, 0.6);
 
 /* Special */
---color-gallows: #8B4513;
+--color-gallows: #8b4513;
 ```
 
 ### Global Button Classes (defined in `frontend/src/index.css`)
+
 Use these instead of creating new button styles:
+
 - `.btn` - Base button (padding, font, border-radius)
 - `.btn-success` - Green button
 - `.btn-error` - Red button
 - `.btn-primary` - Blue button
 
 ### Styling Rules
+
 1. **Use CSS Modules** - Every component gets a `.module.css` file
 2. **No inline styles** - All styles go in CSS modules
 3. **Use CSS variables** - Reference colors with `var(--color-xxx)`
@@ -63,6 +68,7 @@ Use these instead of creating new button styles:
 **Status**: [ ] Not Started | [ ] In Progress | [x] Completed
 
 ### Tasks
+
 - [x] Create word list data file (`server/src/data/wordList.ts`) with 100+ common words
 - [x] Create hangman routes file (`server/src/routes/hangman.ts`)
 - [x] Create hangman controller (`server/src/controllers/hangmanController.ts`)
@@ -75,25 +81,27 @@ Use these instead of creating new button styles:
 
 ### API Endpoints Specification
 
-| Method | Endpoint | Description | Request Body | Response |
-|--------|----------|-------------|--------------|----------|
-| GET | `/api/hangman/word` | Get random word | - | `{ success: boolean, data: { word: string, length: number } }` |
-| POST | `/api/hangman/validate-guess` | Validate a letter guess | `{ word: string, guess: string }` | `{ success: boolean, data: { isCorrect: boolean, positions: number[] } }` |
+| Method | Endpoint                      | Description             | Request Body                      | Response                                                                  |
+| ------ | ----------------------------- | ----------------------- | --------------------------------- | ------------------------------------------------------------------------- |
+| GET    | `/api/hangman/word`           | Get random word         | -                                 | `{ success: boolean, data: { word: string, length: number } }`            |
+| POST   | `/api/hangman/validate-guess` | Validate a letter guess | `{ word: string, guess: string }` | `{ success: boolean, data: { isCorrect: boolean, positions: number[] } }` |
 
 #### Phase 1 Completion Report
-| Question | Response |
-|----------|----------|
-| What was implemented? | Word list (120 words), hangman service with getRandomWord() and validateGuess(), controller with request handlers, routes, and main server registration |
-| Were there any deviations from the plan? | Response format wrapped in `{ success: boolean, data: {...} }` for consistency with API patterns |
-| Issues/blockers encountered? | Minor TypeScript warning for unused `req` parameter |
-| How were issues resolved? | Prefixed with underscore `_req` to indicate intentionally unused |
-| Any technical debt introduced? | None |
-| Recommendations for next phase? | API is ready. Frontend can start consuming endpoints immediately |
+
+| Question                                 | Response                                                                                                                                                |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| What was implemented?                    | Word list (120 words), hangman service with getRandomWord() and validateGuess(), controller with request handlers, routes, and main server registration |
+| Were there any deviations from the plan? | Response format wrapped in `{ success: boolean, data: {...} }` for consistency with API patterns                                                        |
+| Issues/blockers encountered?             | Minor TypeScript warning for unused `req` parameter                                                                                                     |
+| How were issues resolved?                | Prefixed with underscore `_req` to indicate intentionally unused                                                                                        |
+| Any technical debt introduced?           | None                                                                                                                                                    |
+| Recommendations for next phase?          | API is ready. Frontend can start consuming endpoints immediately                                                                                        |
 
 **Completed by**: `senior-backend-engineer`
 **Date Completed**: 2025-12-26
 
 #### Notes for Future Phases
+
 - **New dependencies**: None added
 - **API changes**: Two new hangman endpoints added at `/api/hangman/*`
 - **Config changes**: None
@@ -113,6 +121,7 @@ Use these instead of creating new button styles:
 **Status**: [ ] Not Started | [ ] In Progress | [x] Completed
 
 ### Tasks
+
 - [x] Create folder structure: `frontend/src/features/hangman/`
 - [x] Create game types (`frontend/src/features/hangman/types.ts`)
   - GameMode enum (SINGLE_PLAYER, TWO_PLAYER)
@@ -137,19 +146,21 @@ AttemptsDisplay: props: { remaining: number, max: number }
 ```
 
 #### Phase 2 Completion Report
-| Question | Response |
-|----------|----------|
-| What was implemented? | All core game components: HangmanVisual (SVG), WordDisplay, LetterKeyboard, UsedLetters, AttemptsDisplay, API service, useHangmanGame hook, types, and a demo HangmanGame page |
-| Were there any deviations from the plan? | Added a bonus HangmanGame.tsx demo page for testing components together; added components/index.ts barrel export |
-| Issues/blockers encountered? | None |
-| How were issues resolved? | N/A |
-| Any technical debt introduced? | None - all components are properly typed and reusable |
-| Recommendations for next phase? | Components are ready for integration. Phase 3 can directly use HangmanGame page or build SinglePlayerGame from scratch using the components |
+
+| Question                                 | Response                                                                                                                                                                       |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| What was implemented?                    | All core game components: HangmanVisual (SVG), WordDisplay, LetterKeyboard, UsedLetters, AttemptsDisplay, API service, useHangmanGame hook, types, and a demo HangmanGame page |
+| Were there any deviations from the plan? | Added a bonus HangmanGame.tsx demo page for testing components together; added components/index.ts barrel export                                                               |
+| Issues/blockers encountered?             | None                                                                                                                                                                           |
+| How were issues resolved?                | N/A                                                                                                                                                                            |
+| Any technical debt introduced?           | None - all components are properly typed and reusable                                                                                                                          |
+| Recommendations for next phase?          | Components are ready for integration. Phase 3 can directly use HangmanGame page or build SinglePlayerGame from scratch using the components                                    |
 
 **Completed by**: `frontend-engineer`
 **Date Completed**: 2025-12-26
 
 #### Notes for Future Phases
+
 - **New dependencies**: None (using existing React setup)
 - **Component exports**: All components exported from `features/hangman/index.ts`
 - **CSS Modules**: All components refactored to use CSS Modules (see CSS Conventions section above)
@@ -177,6 +188,7 @@ AttemptsDisplay: props: { remaining: number, max: number }
 **Status**: [ ] Not Started | [ ] In Progress | [x] Completed
 
 ### Tasks
+
 - [x] Create SinglePlayerGame component (`frontend/src/features/hangman/pages/SinglePlayerGame.tsx`)
 - [x] Implement game initialization (fetch word from API)
 - [x] Implement letter guessing logic with state updates
@@ -188,6 +200,7 @@ AttemptsDisplay: props: { remaining: number, max: number }
 - [x] Style the game screen with CSS Modules
 
 ### Game Logic Flow
+
 ```
 1. Start -> Fetch random word from API
 2. Display: underscores, keyboard, hangman (empty), attempts (6)
@@ -200,19 +213,21 @@ AttemptsDisplay: props: { remaining: number, max: number }
 ```
 
 #### Phase 3 Completion Report
-| Question | Response |
-|----------|----------|
-| What was implemented? | SinglePlayerGame page, GameOverModal component, global CSS variables and button utilities in index.css |
-| Were there any deviations from the plan? | Used CSS Modules instead of inline styles; Added global CSS variables for colors and reusable button classes |
-| Issues/blockers encountered? | Initial implementation used inline styles which was corrected to CSS modules; Colors were hardcoded, moved to global CSS vars |
-| How were issues resolved? | Created .module.css files for each component; Added CSS variables (--color-success, --color-error, --color-primary, etc.) and .btn utility classes to index.css |
-| Any technical debt introduced? | None - code follows best practices with CSS modules and global variables |
-| Recommendations for next phase? | Global button classes (.btn, .btn-success, .btn-primary) are ready for reuse in MainMenu and other pages |
+
+| Question                                 | Response                                                                                                                                                        |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| What was implemented?                    | SinglePlayerGame page, GameOverModal component, global CSS variables and button utilities in index.css                                                          |
+| Were there any deviations from the plan? | Used CSS Modules instead of inline styles; Added global CSS variables for colors and reusable button classes                                                    |
+| Issues/blockers encountered?             | Initial implementation used inline styles which was corrected to CSS modules; Colors were hardcoded, moved to global CSS vars                                   |
+| How were issues resolved?                | Created .module.css files for each component; Added CSS variables (--color-success, --color-error, --color-primary, etc.) and .btn utility classes to index.css |
+| Any technical debt introduced?           | None - code follows best practices with CSS modules and global variables                                                                                        |
+| Recommendations for next phase?          | Global button classes (.btn, .btn-success, .btn-primary) are ready for reuse in MainMenu and other pages                                                        |
 
 **Completed by**: `frontend-engineer`
 **Date Completed**: 2025-12-26
 
 #### Notes for Future Phases
+
 - **Reusable logic**: Game hook can be reused for two-player mode
 - **Global CSS variables added to index.css**:
   - `--color-success` (#4CAF50), `--color-success-hover` (#45a049)
@@ -246,8 +261,10 @@ Use **Data Mode** with `createBrowserRouter` - recommended for existing Vite/Rea
 **Reference**: [React Router Modes](https://reactrouter.com/start/modes) | [SPA Guide](https://reactrouter.com/how-to/spa)
 
 ### Tasks
+
 - [x] Install React Router v7: `pnpm add react-router`
 - [x] Create router configuration (`frontend/src/router.tsx`)
+
   ```tsx
   import { createBrowserRouter } from "react-router";
 
@@ -267,7 +284,7 @@ Use **Data Mode** with `createBrowserRouter` - recommended for existing Vite/Rea
               children: [
                 { path: "setup", Component: TwoPlayerSetup },
                 { path: "game", Component: TwoPlayerGame },
-              ]
+              ],
             },
           ],
         },
@@ -275,16 +292,17 @@ Use **Data Mode** with `createBrowserRouter` - recommended for existing Vite/Rea
     },
   ]);
   ```
+
 - [x] Create RootLayout component with `<Outlet />` for nested routes
 - [x] Update `main.tsx` to use `RouterProvider`:
+
   ```tsx
   import { RouterProvider } from "react-router";
   import { router } from "./router";
 
-  ReactDOM.createRoot(root).render(
-    <RouterProvider router={router} />
-  );
+  ReactDOM.createRoot(root).render(<RouterProvider router={router} />);
   ```
+
 - [x] Create MainMenu component (`frontend/src/features/hangman/pages/MainMenu.tsx`)
   - Title: "Hangman"
   - Button: "Single Player" -> navigates to `/hangman/single`
@@ -296,20 +314,20 @@ Use **Data Mode** with `createBrowserRouter` - recommended for existing Vite/Rea
 
 ### Route Structure
 
-| Path | Component | Description |
-|------|-----------|-------------|
-| `/` | Home/Redirect | Landing or redirect to hangman |
-| `/hangman` | MainMenu | Game mode selection |
-| `/hangman/single` | SinglePlayerGame | Single player gameplay |
-| `/hangman/two-player/setup` | TwoPlayerSetup | Enter player names |
-| `/hangman/two-player/game` | TwoPlayerGame | Two player gameplay |
+| Path                        | Component        | Description                    |
+| --------------------------- | ---------------- | ------------------------------ |
+| `/`                         | Home/Redirect    | Landing or redirect to hangman |
+| `/hangman`                  | MainMenu         | Game mode selection            |
+| `/hangman/single`           | SinglePlayerGame | Single player gameplay         |
+| `/hangman/two-player/setup` | TwoPlayerSetup   | Enter player names             |
+| `/hangman/two-player/game`  | TwoPlayerGame    | Two player gameplay            |
 
 ### Navigation Patterns (React Router v7)
 
 ```tsx
 // Using Link component (preferred for simple navigation)
 import { Link } from "react-router";
-<Link to="/hangman/single">Single Player</Link>
+<Link to="/hangman/single">Single Player</Link>;
 
 // Using useNavigate hook (for programmatic navigation)
 import { useNavigate } from "react-router";
@@ -318,24 +336,28 @@ navigate("/hangman");
 
 // Using loader for data fetching (optional for this phase)
 export async function loader() {
-  return { /* data */ };
+  return {
+    /* data */
+  };
 }
 ```
 
 #### Phase 4 Completion Report
-| Question | Response |
-|----------|----------|
-| What was implemented? | React Router v7 with Data Mode (createBrowserRouter), RootLayout with Outlet, MainMenu with Link navigation, updated SinglePlayerGame with useNavigate |
-| Were there any deviations from the plan? | Root path `/` renders MainMenu directly instead of separate Home component (simpler approach) |
-| Issues/blockers encountered? | MainMenu CSS initially had hardcoded gradient color |
-| How were issues resolved? | Added `--gradient-menu` CSS variable to index.css and updated MainMenu.module.css to use it |
-| Any technical debt introduced? | Placeholder components for TwoPlayerSetup and TwoPlayerGame in router.tsx (expected - will be replaced in Phase 5-6) |
-| Recommendations for next phase? | Two-player routes are set up with placeholders, ready to be replaced with actual components |
+
+| Question                                 | Response                                                                                                                                               |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| What was implemented?                    | React Router v7 with Data Mode (createBrowserRouter), RootLayout with Outlet, MainMenu with Link navigation, updated SinglePlayerGame with useNavigate |
+| Were there any deviations from the plan? | Root path `/` renders MainMenu directly instead of separate Home component (simpler approach)                                                          |
+| Issues/blockers encountered?             | MainMenu CSS initially had hardcoded gradient color                                                                                                    |
+| How were issues resolved?                | Added `--gradient-menu` CSS variable to index.css and updated MainMenu.module.css to use it                                                            |
+| Any technical debt introduced?           | Placeholder components for TwoPlayerSetup and TwoPlayerGame in router.tsx (expected - will be replaced in Phase 5-6)                                   |
+| Recommendations for next phase?          | Two-player routes are set up with placeholders, ready to be replaced with actual components                                                            |
 
 **Completed by**: `frontend-engineer`
 **Date Completed**: 2025-12-26
 
 #### Notes for Future Phases
+
 - **New dependencies**: `react-router` (v7.11.0)
 - **Route structure**: All hangman routes nested under `/hangman`
 - **Navigation**: Use `<Link>` for declarative, `useNavigate()` for programmatic
@@ -360,6 +382,7 @@ export async function loader() {
 **Status**: [ ] Not Started | [ ] In Progress | [x] Completed
 
 ### Tasks
+
 - [x] Create TwoPlayerSetup component (`frontend/src/features/hangman/pages/TwoPlayerSetup.tsx`)
 - [x] Add Player 1 name input (optional, default: "Player 1")
 - [x] Add Player 2 name input (optional, default: "Player 2")
@@ -370,6 +393,7 @@ export async function loader() {
 - [x] Style setup screen
 
 ### State Structure
+
 ```typescript
 interface TwoPlayerState {
   player1: { name: string; score: number };
@@ -380,19 +404,21 @@ interface TwoPlayerState {
 ```
 
 #### Phase 5 Completion Report
-| Question | Response |
-|----------|----------|
-| What was implemented? | TwoPlayerContext (React Context with Provider), TwoPlayerSetup component with player name inputs, TwoPlayerState type, CSS Module styling |
-| Were there any deviations from the plan? | Added 20-character limit on player name inputs for UX; Context wrapped in RootLayout for global access |
-| Issues/blockers encountered? | None |
-| How were issues resolved? | N/A |
-| Any technical debt introduced? | None - all code is properly typed and follows project conventions |
-| Recommendations for next phase? | TwoPlayerContext is ready. Phase 6 should use `useTwoPlayerContext()` to access player state, scores, and round management functions |
+
+| Question                                 | Response                                                                                                                                  |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| What was implemented?                    | TwoPlayerContext (React Context with Provider), TwoPlayerSetup component with player name inputs, TwoPlayerState type, CSS Module styling |
+| Were there any deviations from the plan? | Added 20-character limit on player name inputs for UX; Context wrapped in RootLayout for global access                                    |
+| Issues/blockers encountered?             | None                                                                                                                                      |
+| How were issues resolved?                | N/A                                                                                                                                       |
+| Any technical debt introduced?           | None - all code is properly typed and follows project conventions                                                                         |
+| Recommendations for next phase?          | TwoPlayerContext is ready. Phase 6 should use `useTwoPlayerContext()` to access player state, scores, and round management functions      |
 
 **Completed by**: `frontend-engineer`
 **Date Completed**: 2025-12-26
 
 #### Notes for Future Phases
+
 - **State management**: Two-player state persisted during game session via React Context
 - **Context functions available**:
   - `setPlayerNames(name1, name2)` - Set player names (called in setup)
@@ -419,6 +445,7 @@ interface TwoPlayerState {
 **Status**: [ ] Not Started | [ ] In Progress | [x] Completed
 
 ### Tasks
+
 - [x] Create TwoPlayerGame component (`frontend/src/features/hangman/pages/TwoPlayerGame.tsx`)
 - [x] Display active player indicator prominently
 - [x] Create Scoreboard component (Player 1 vs Player 2 scores)
@@ -434,6 +461,7 @@ interface TwoPlayerState {
 - [x] Style two-player interface
 
 ### Game Flow
+
 ```
 1. Setup -> Enter names -> Start
 2. Round 1: Player 1 plays
@@ -446,19 +474,21 @@ interface TwoPlayerState {
 ```
 
 #### Phase 6 Completion Report
-| Question | Response |
-|----------|----------|
-| What was implemented? | TwoPlayerGame main page, Scoreboard component (shows both players' scores with active player highlighting), RoundTransition modal (shows round result and next player), FinalScoreModal (winner announcement with trophy emoji), CSS Modules for all components |
-| Were there any deviations from the plan? | Added "Now Playing" banner for extra visibility of current player; used gamePhase state machine ('playing', 'transition', 'ended') for cleaner flow control |
-| Issues/blockers encountered? | None |
-| How were issues resolved? | N/A |
-| Any technical debt introduced? | None - all components properly typed and follow project CSS conventions |
-| Recommendations for next phase? | Add keyboard support for letter input, test on mobile devices for responsive design |
+
+| Question                                 | Response                                                                                                                                                                                                                                                        |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| What was implemented?                    | TwoPlayerGame main page, Scoreboard component (shows both players' scores with active player highlighting), RoundTransition modal (shows round result and next player), FinalScoreModal (winner announcement with trophy emoji), CSS Modules for all components |
+| Were there any deviations from the plan? | Added "Now Playing" banner for extra visibility of current player; used gamePhase state machine ('playing', 'transition', 'ended') for cleaner flow control                                                                                                     |
+| Issues/blockers encountered?             | None                                                                                                                                                                                                                                                            |
+| How were issues resolved?                | N/A                                                                                                                                                                                                                                                             |
+| Any technical debt introduced?           | None - all components properly typed and follow project CSS conventions                                                                                                                                                                                         |
+| Recommendations for next phase?          | Add keyboard support for letter input, test on mobile devices for responsive design                                                                                                                                                                             |
 
 **Completed by**: `frontend-engineer`
 **Date Completed**: 2025-12-26
 
 #### Notes for Future Phases
+
 - **Feature complete**: Core game functionality done after this phase
 - **Files created**:
   - `frontend/src/features/hangman/pages/TwoPlayerGame.tsx` - Main two-player game page
@@ -489,6 +519,7 @@ interface TwoPlayerState {
 **Status**: [ ] Not Started | [ ] In Progress | [x] Completed
 
 ### Tasks
+
 - [x] Add keyboard support (physical keyboard letter input)
 - [x] Add loading states for API calls
 - [x] Add error handling for API failures
@@ -500,6 +531,7 @@ interface TwoPlayerState {
 - [x] Clean up unused code
 
 ### Testing Checklist
+
 - [x] Single player: Start game, win by guessing all letters
 - [x] Single player: Start game, lose by making 6 wrong guesses
 - [x] Single player: Play again after win/lose
@@ -513,19 +545,21 @@ interface TwoPlayerState {
 - [x] Mobile layout is usable
 
 #### Phase 7 Completion Report
-| Question | Response |
-|----------|----------|
-| What was implemented? | Keyboard support via `useKeyboardInput` hook, `isGuessing` loading state with "Checking..." indicator, responsive design with 768px/480px breakpoints for all components, documentation in `webui-templates-index.md` |
-| Were there any deviations from the plan? | Removed unused `HangmanGame.tsx` demo page created in Phase 2; Made HangmanVisual SVG responsive via viewBox instead of fixed dimensions |
-| Issues/blockers encountered? | None - all tasks completed smoothly |
-| How were issues resolved? | N/A |
-| Any technical debt introduced? | None - code follows project conventions and is well-structured |
-| Recommendations for next phase? | Project is feature-complete. Consider adding: sound effects, difficulty levels, word categories, persistent high scores |
+
+| Question                                 | Response                                                                                                                                                                                                              |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| What was implemented?                    | Keyboard support via `useKeyboardInput` hook, `isGuessing` loading state with "Checking..." indicator, responsive design with 768px/480px breakpoints for all components, documentation in `webui-templates-index.md` |
+| Were there any deviations from the plan? | Removed unused `HangmanGame.tsx` demo page created in Phase 2; Made HangmanVisual SVG responsive via viewBox instead of fixed dimensions                                                                              |
+| Issues/blockers encountered?             | None - all tasks completed smoothly                                                                                                                                                                                   |
+| How were issues resolved?                | N/A                                                                                                                                                                                                                   |
+| Any technical debt introduced?           | None - code follows project conventions and is well-structured                                                                                                                                                        |
+| Recommendations for next phase?          | Project is feature-complete. Consider adding: sound effects, difficulty levels, word categories, persistent high scores                                                                                               |
 
 **Completed by**: `frontend-engineer`
 **Date Completed**: 2025-12-26
 
 #### Notes for Future Phases
+
 - **Files created**:
   - `frontend/src/features/hangman/useKeyboardInput.ts` - Physical keyboard support hook
   - `docs-claude/webui-templates-index.md` - Frontend pages/templates documentation
@@ -544,6 +578,7 @@ interface TwoPlayerState {
 ## File Structure Summary
 
 ### Backend (server/)
+
 ```
 server/src/
 ├── data/
@@ -557,6 +592,7 @@ server/src/
 ```
 
 ### Frontend (frontend/)
+
 ```
 frontend/src/
 ├── features/
@@ -588,22 +624,165 @@ frontend/src/
 ## Dependencies
 
 ### Frontend (to be installed if not present)
+
 - `react-router-dom` - For routing between game screens
 
 ### Backend
+
 - No additional dependencies required
 
 ---
 
 ## Execution Order
 
-1. **Phase 1** (Backend) - Must complete first as frontend depends on API
-2. **Phase 2** (Frontend Components) - Core building blocks
-3. **Phase 3** (Single Player) - First playable feature
-4. **Phase 4** (Navigation) - Connect everything
-5. **Phase 5** (Two-Player Setup) - Prepare for multiplayer
-6. **Phase 6** (Two-Player Game) - Full multiplayer implementation
-7. **Phase 7** (Polish) - Final testing and refinements
+1. **Phase 1** (Backend) - Must complete first as frontend depends on API ✅
+2. **Phase 2** (Frontend Components) - Core building blocks ✅
+3. **Phase 3** (Single Player) - First playable feature ✅
+4. **Phase 4** (Navigation) - Connect everything ✅
+5. **Phase 5** (Two-Player Setup) - Prepare for multiplayer ✅
+6. **Phase 6** (Two-Player Game) - Full multiplayer implementation ✅
+7. **Phase 7** (Polish) - Final testing and refinements ✅
+8. **Phase 8** (100vh Layout) - Full viewport layout, no scrolling ✅
+
+---
+
+## Phase 8: Full Viewport Layout (100vh)
+
+**Assigned to**: `frontend-engineer`
+**Date Started**: 2025-12-26
+**Status**: [ ] Not Started | [ ] In Progress | [x] Completed
+
+### Objective
+
+Ensure all game screens fit within 100vh (full viewport height) with no scrolling. Everything should be "in your face" - visible at all times.
+
+### Layout Strategy
+
+```
+┌─────────────────────────────────────────┐
+│  Header/Title Area (fixed height)       │  ~10%
+├─────────────────────────────────────────┤
+│                                         │
+│  Main Content Area (flex-grow)          │  ~70%
+│  - Hangman visual                       │
+│  - Word display                         │
+│  - Scoreboard (two-player)              │
+│                                         │
+├─────────────────────────────────────────┤
+│  Keyboard/Controls (fixed height)       │  ~20%
+│  - Letter keyboard                      │
+│  - Action buttons                       │
+└─────────────────────────────────────────┘
+```
+
+### Tasks
+
+- [x] Create global layout styles for 100vh container
+- [x] Update MainMenu.module.css - center content vertically in 100vh
+- [x] Update SinglePlayerGame.module.css:
+  - [x] Use `height: 100vh` on container
+  - [x] Use flexbox column layout
+  - [x] Hangman visual: constrained max-height, responsive
+  - [x] Word display: compact spacing
+  - [x] Keyboard: fixed at bottom, smaller on mobile
+  - [x] Remove any overflow/scroll
+- [x] Update TwoPlayerSetup.module.css - center form in 100vh
+- [x] Update TwoPlayerGame.module.css:
+  - [x] Same structure as SinglePlayer
+  - [x] Scoreboard: compact horizontal layout
+  - [x] Active player indicator: non-intrusive
+- [x] Update HangmanVisual - use percentage-based sizing
+- [x] Update LetterKeyboard - compact grid, smaller buttons on small screens
+- [x] Update WordDisplay - responsive letter sizing
+- [x] Update AttemptsDisplay - inline/compact
+- [x] Update all modals - centered in viewport, not blocking view
+- [x] Test on multiple viewport sizes (desktop, tablet, mobile)
+- [x] Ensure no horizontal scrolling either
+
+### CSS Approach
+
+```css
+/* Base container - add to index.css or layout */
+.game-container {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-header {
+  flex-shrink: 0;
+  /* fixed height */
+}
+
+.game-main {
+  flex: 1;
+  min-height: 0; /* Important for flex children */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.game-controls {
+  flex-shrink: 0;
+  /* fixed height */
+}
+```
+
+### Component Size Guidelines
+
+| Component        | Desktop   | Tablet    | Mobile    |
+| ---------------- | --------- | --------- | --------- |
+| Hangman SVG      | max 250px | max 200px | max 150px |
+| Word letters     | 2.5rem    | 2rem      | 1.5rem    |
+| Keyboard buttons | 45px      | 40px      | 32px      |
+| Scoreboard       | inline    | inline    | stacked   |
+| Modal            | 400px max | 90vw      | 95vw      |
+
+### Responsive Breakpoints
+
+- Desktop: > 1024px
+- Tablet: 768px - 1024px
+- Mobile: < 768px
+- Small mobile: < 480px
+
+#### Phase 8 Completion Report
+
+| Question                                 | Response                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| What was implemented?                    | Full 100vh viewport layout for all screens. Global CSS reset (html, body, #root at 100% height, overflow hidden). Updated all page containers (MainMenu, SinglePlayerGame, TwoPlayerSetup, TwoPlayerGame) with height: 100vh, flexbox column layout. Updated all components (HangmanVisual, WordDisplay, LetterKeyboard, AttemptsDisplay, Scoreboard) with flex-shrink: 0, compact sizing, vh-based max-heights. Updated all modals with viewport-centered layout, max-height: 90vh. Added gameArea wrapper divs for flex content distribution. Added height-based media queries (@media max-height: 600px, 500px). |
+| Were there any deviations from the plan? | Removed UsedLetters component from game screens to save vertical space (keyboard already shows letter status). Added additional media queries for very small screens (max-height: 500px, 600px). Used space-evenly instead of space-between for gameArea justify-content.                                                                                                                                                                                                                                                                                                                                           |
+| Issues/blockers encountered?             | None - all changes were straightforward CSS updates                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| How were issues resolved?                | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Any technical debt introduced?           | None - clean CSS module updates following existing conventions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Recommendations for next phase?          | Project is feature-complete with 100vh layout. Consider adding: animations/transitions for smoother UX, dark mode support, sound effects, or persistent high scores                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+
+**Completed by**: `frontend-engineer`
+**Date Completed**: 2025-12-26
+
+#### Notes for Future Phases
+
+- **CSS changes**: Major layout restructure to flex-based 100vh containers
+- **Files modified**:
+  - `frontend/src/index.css` - Added global reset (html, body, #root height 100%, overflow hidden) and game-container utility classes
+  - `frontend/src/pages/MainMenu.module.css` - Changed min-height to height: 100vh, added overflow: hidden
+  - `frontend/src/pages/SinglePlayerGame.module.css` - Complete rewrite with 100vh layout, gameArea wrapper, compact spacing
+  - `frontend/src/pages/SinglePlayerGame.tsx` - Added gameArea wrapper div, removed UsedLetters component
+  - `frontend/src/pages/TwoPlayerSetup.module.css` - Changed min-height to height: 100vh
+  - `frontend/src/pages/TwoPlayerGame.module.css` - Complete rewrite with 100vh layout, gameArea wrapper, compact spacing
+  - `frontend/src/pages/TwoPlayerGame.tsx` - Added gameArea wrapper div, removed UsedLetters component
+  - `frontend/src/components/HangmanVisual.module.css` - Added vh-based max-height constraints, flex-shrink: 0
+  - `frontend/src/components/WordDisplay.module.css` - Compact sizing, flex-shrink: 0, white text with shadow
+  - `frontend/src/components/LetterKeyboard.module.css` - Compact grid with smaller buttons, height-based breakpoints
+  - `frontend/src/components/AttemptsDisplay.module.css` - Inline compact layout, smaller progress bar
+  - `frontend/src/components/Scoreboard.module.css` - Compact horizontal layout, smaller sizes
+  - `frontend/src/components/GameOverModal.module.css` - Viewport-centered, max-height: 90vh
+  - `frontend/src/components/RoundTransition.module.css` - Viewport-centered, max-height: 90vh
+  - `frontend/src/components/FinalScoreModal.module.css` - Viewport-centered, max-height: 90vh
+- **Breaking changes**: May affect any custom styling added later
+- **Testing required**: All screen sizes must be manually verified
 
 ---
 

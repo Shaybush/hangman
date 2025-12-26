@@ -5,7 +5,6 @@ import { useKeyboardInput } from '../hooks/useKeyboardInput';
 import { HangmanVisual } from '../components/HangmanVisual';
 import { WordDisplay } from '../components/WordDisplay';
 import { LetterKeyboard } from '../components/LetterKeyboard';
-import { UsedLetters } from '../components/UsedLetters';
 import { AttemptsDisplay } from '../components/AttemptsDisplay';
 import { GameOverModal } from '../components/GameOverModal';
 import styles from './SinglePlayerGame.module.css';
@@ -71,43 +70,38 @@ export function SinglePlayerGame() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>
-        Single Player
-      </h1>
+      <h1 className={styles.title}>Single Player</h1>
 
-      <HangmanVisual wrongGuesses={gameState.wrongGuesses} />
+      <div className={styles.gameArea}>
+        <HangmanVisual wrongGuesses={gameState.wrongGuesses} />
 
-      {gameState.word && (
-        <>
-          <WordDisplay 
-            word={gameState.word} 
-            revealedLetters={gameState.revealedLetters} 
-          />
+        {gameState.word && (
+          <>
+            <WordDisplay
+              word={gameState.word}
+              revealedLetters={gameState.revealedLetters}
+            />
 
-          <AttemptsDisplay 
-            remaining={remainingAttempts} 
-            max={gameState.maxAttempts} 
-          />
+            <AttemptsDisplay
+              remaining={remainingAttempts}
+              max={gameState.maxAttempts}
+            />
 
-          <UsedLetters 
-            correct={getCorrectLetters()} 
-            incorrect={getIncorrectLetters()} 
-          />
+            <LetterKeyboard
+              usedLetters={gameState.usedLetters}
+              correctLetters={gameState.revealedLetters}
+              onGuess={makeGuess}
+              disabled={isGameOver || isGuessing}
+            />
 
-          <LetterKeyboard
-            usedLetters={gameState.usedLetters}
-            correctLetters={gameState.revealedLetters}
-            onGuess={makeGuess}
-            disabled={isGameOver || isGuessing}
-          />
-
-          {isGuessing && (
-            <div className={styles.checkingIndicator}>
-              Checking...
-            </div>
-          )}
-        </>
-      )}
+            {isGuessing && (
+              <div className={styles.checkingIndicator}>
+                Checking...
+              </div>
+            )}
+          </>
+        )}
+      </div>
 
       <GameOverModal
         isOpen={isGameOver}

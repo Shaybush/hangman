@@ -6,7 +6,6 @@ import { useTwoPlayerContext } from '../context/TwoPlayerContext';
 import { HangmanVisual } from '../components/HangmanVisual';
 import { WordDisplay } from '../components/WordDisplay';
 import { LetterKeyboard } from '../components/LetterKeyboard';
-import { UsedLetters } from '../components/UsedLetters';
 import { AttemptsDisplay } from '../components/AttemptsDisplay';
 import { Scoreboard } from '../components/Scoreboard';
 import { RoundTransition } from '../components/RoundTransition';
@@ -164,39 +163,36 @@ export function TwoPlayerGame() {
         <span className={styles.currentPlayerName}>{getCurrentPlayerName()}</span>
       </div>
 
-      <HangmanVisual wrongGuesses={gameState.wrongGuesses} />
+      <div className={styles.gameArea}>
+        <HangmanVisual wrongGuesses={gameState.wrongGuesses} />
 
-      {gameState.word && (
-        <>
-          <WordDisplay
-            word={gameState.word}
-            revealedLetters={gameState.revealedLetters}
-          />
+        {gameState.word && (
+          <>
+            <WordDisplay
+              word={gameState.word}
+              revealedLetters={gameState.revealedLetters}
+            />
 
-          <AttemptsDisplay
-            remaining={remainingAttempts}
-            max={gameState.maxAttempts}
-          />
+            <AttemptsDisplay
+              remaining={remainingAttempts}
+              max={gameState.maxAttempts}
+            />
 
-          <UsedLetters
-            correct={getCorrectLetters()}
-            incorrect={getIncorrectLetters()}
-          />
+            <LetterKeyboard
+              usedLetters={gameState.usedLetters}
+              correctLetters={gameState.revealedLetters}
+              onGuess={makeGuess}
+              disabled={isRoundOver || isGuessing}
+            />
 
-          <LetterKeyboard
-            usedLetters={gameState.usedLetters}
-            correctLetters={gameState.revealedLetters}
-            onGuess={makeGuess}
-            disabled={isRoundOver || isGuessing}
-          />
-
-          {isGuessing && (
-            <div className={styles.checkingIndicator}>
-              Checking...
-            </div>
-          )}
-        </>
-      )}
+            {isGuessing && (
+              <div className={styles.checkingIndicator}>
+                Checking...
+              </div>
+            )}
+          </>
+        )}
+      </div>
 
       <div className={styles.endGameContainer}>
         <button

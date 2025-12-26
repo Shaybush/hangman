@@ -34,6 +34,41 @@
   --gradient-menu: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
+/* Global Reset for 100vh layout */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Game Container - Full Viewport Layout */
+.game-container {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-header {
+  flex-shrink: 0;
+}
+
+.game-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.game-controls {
+  flex-shrink: 0;
+}
+
 /* Hangman Button Utilities */
 .btn {
   padding: 12px 24px;

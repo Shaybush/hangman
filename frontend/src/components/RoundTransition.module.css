@@ -9,23 +9,26 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  font-family: Arial, sans-serif;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .modal {
-  background-color: #fff;
+  background-color: var(--color-white);
   border-radius: 12px;
-  padding: 40px;
-  max-width: 500px;
-  width: 90%;
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
   text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin: 0 0 0.75rem 0;
 }
 
 .titleWin {
@@ -37,27 +40,93 @@
 }
 
 .word {
-  font-size: 1.5rem;
-  margin-bottom: 30px;
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
   color: var(--color-text);
 }
 
 .nextPlayerContainer {
-  margin-bottom: 30px;
-  padding: 20px;
+  margin-bottom: 1.25rem;
+  padding: 1rem;
   background-color: var(--color-bg-light);
   border-radius: 8px;
 }
 
 .nextPlayerTitle {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: var(--color-primary);
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
 .nextPlayerText {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--color-text-light);
   margin: 0;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonContainer button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .modal {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .word {
+    font-size: 1.1rem;
+  }
+
+  .nextPlayerContainer {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .nextPlayerTitle {
+    font-size: 1.25rem;
+  }
+
+  .nextPlayerText {
+    font-size: 0.95rem;
+  }
+}
+
+/* Very small screens */
+@media (max-height: 500px) {
+  .modal {
+    padding: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .word {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .nextPlayerContainer {
+    padding: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .nextPlayerTitle {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
 }
