@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useHangmanGame } from '../useHangmanGame';
+import { useKeyboardInput } from '../useKeyboardInput';
 import { HangmanVisual } from '../components/HangmanVisual';
 import { WordDisplay } from '../components/WordDisplay';
 import { LetterKeyboard } from '../components/LetterKeyboard';
@@ -14,6 +15,7 @@ export function SinglePlayerGame() {
   const {
     gameState,
     isLoading,
+    isGuessing,
     error,
     startGame,
     makeGuess,
@@ -34,6 +36,14 @@ export function SinglePlayerGame() {
   const handleReturnToMenu = () => {
     navigate("/hangman");
   };
+
+  const isGameOver = gameState.gameStatus !== 'playing';
+
+  // Enable keyboard input when game is active and not guessing
+  useKeyboardInput({
+    onKeyPress: makeGuess,
+    disabled: isGameOver || isLoading || isGuessing
+  });
 
   if (isLoading) {
     return (
@@ -57,7 +67,6 @@ export function SinglePlayerGame() {
     );
   }
 
-  const isGameOver = gameState.gameStatus !== 'playing';
   const remainingAttempts = gameState.maxAttempts - gameState.wrongGuesses;
 
   return (
@@ -89,8 +98,14 @@ export function SinglePlayerGame() {
             usedLetters={gameState.usedLetters}
             correctLetters={gameState.revealedLetters}
             onGuess={makeGuess}
-            disabled={isGameOver}
+            disabled={isGameOver || isGuessing}
           />
+
+          {isGuessing && (
+            <div className={styles.checkingIndicator}>
+              Checking...
+            </div>
+          )}
         </>
       )}
 

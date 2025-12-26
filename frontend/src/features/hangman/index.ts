@@ -21,6 +21,7 @@ export { TwoPlayerGame } from './pages/TwoPlayerGame';
 
 // Hooks
 export { useHangmanGame } from './useHangmanGame';
+export { useKeyboardInput } from './useKeyboardInput';
 
 // API
 export { getRandomWord, validateGuess } from './api';

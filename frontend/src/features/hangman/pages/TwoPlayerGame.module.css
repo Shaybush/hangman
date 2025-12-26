@@ -106,3 +106,24 @@
     padding-top: 15px;
   }
 }
+
+.checkingIndicator {
+  margin-top: 15px;
+  text-align: center;
+  color: var(--color-white);
+  font-size: 1rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 20px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

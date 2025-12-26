@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useHangmanGame } from '../useHangmanGame';
+import { useKeyboardInput } from '../useKeyboardInput';
 import { useTwoPlayerContext } from '../TwoPlayerContext';
 import { HangmanVisual } from '../components/HangmanVisual';
 import { WordDisplay } from '../components/WordDisplay';
@@ -27,6 +28,7 @@ export function TwoPlayerGame() {
   const {
     gameState,
     isLoading,
+    isGuessing,
     error,
     startGame,
     makeGuess,
@@ -111,6 +113,14 @@ export function TwoPlayerGame() {
       : twoPlayerState.player1.name;
   };
 
+  const isRoundOver = gameState.gameStatus !== 'playing';
+
+  // Enable keyboard input when round is active and not guessing
+  useKeyboardInput({
+    onKeyPress: makeGuess,
+    disabled: isRoundOver || isLoading || gamePhase !== 'playing' || isGuessing
+  });
+
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
@@ -136,7 +146,6 @@ export function TwoPlayerGame() {
     );
   }
 
-  const isRoundOver = gameState.gameStatus !== 'playing';
   const remainingAttempts = gameState.maxAttempts - gameState.wrongGuesses;
 
   return (
@@ -178,8 +187,14 @@ export function TwoPlayerGame() {
             usedLetters={gameState.usedLetters}
             correctLetters={gameState.revealedLetters}
             onGuess={makeGuess}
-            disabled={isRoundOver}
+            disabled={isRoundOver || isGuessing}
           />
+
+          {isGuessing && (
+            <div className={styles.checkingIndicator}>
+              Checking...
+            </div>
+          )}
         </>
       )}
 

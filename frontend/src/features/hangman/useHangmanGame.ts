@@ -16,6 +16,7 @@ const initialGameState: GameState = {
 export function useHangmanGame() {
   const [gameState, setGameState] = useState<GameState>(initialGameState);
   const [isLoading, setIsLoading] = useState(false);
+  const [isGuessing, setIsGuessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const startGame = useCallback(async () => {
@@ -36,7 +37,7 @@ export function useHangmanGame() {
   }, []);
 
   const makeGuess = useCallback(async (letter: string) => {
-    if (gameState.gameStatus !== 'playing') {
+    if (gameState.gameStatus !== 'playing' || isGuessing) {
       return;
     }
 
@@ -46,6 +47,9 @@ export function useHangmanGame() {
     if (gameState.usedLetters.includes(lowerLetter)) {
       return;
     }
+
+    setIsGuessing(true);
+    setError(null);
 
     try {
       // Validate guess with backend
@@ -87,12 +91,15 @@ export function useHangmanGame() {
     } catch (err) {
       setError('Failed to validate guess. Please try again.');
       console.error('Error validating guess:', err);
+    } finally {
+      setIsGuessing(false);
     }
-  }, [gameState.gameStatus, gameState.usedLetters, gameState.word]);
+  }, [gameState.gameStatus, gameState.usedLetters, gameState.word, isGuessing]);
 
   const resetGame = useCallback(() => {
     setGameState(initialGameState);
     setError(null);
+    setIsGuessing(false);
   }, []);
 
   const getCorrectLetters = useCallback(() => {
@@ -110,6 +117,7 @@ export function useHangmanGame() {
   return {
     gameState,
     isLoading,
+    isGuessing,
     error,
     startGame,
     makeGuess,
