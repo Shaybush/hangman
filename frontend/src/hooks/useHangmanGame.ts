@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import type { GameState } from './types';
-import { getRandomWord, validateGuess } from './api';
+import type { GameState } from '../types';
+import { getRandomWord, validateGuess } from '../api';
 
 const MAX_ATTEMPTS = 6;
 

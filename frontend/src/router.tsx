@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router";
 import { RootLayout } from "./layouts/RootLayout";
-import { MainMenu } from "./features/hangman/pages/MainMenu";
-import { SinglePlayerGame } from "./features/hangman/pages/SinglePlayerGame";
-import { TwoPlayerSetup } from "./features/hangman/pages/TwoPlayerSetup";
-import { TwoPlayerGame } from "./features/hangman/pages/TwoPlayerGame";
+import { MainMenu } from "./pages/MainMenu";
+import { SinglePlayerGame } from "./pages/SinglePlayerGame";
+import { TwoPlayerSetup } from "./pages/TwoPlayerSetup";
+import { TwoPlayerGame } from "./pages/TwoPlayerGame";
 
 export const router = createBrowserRouter([
   {

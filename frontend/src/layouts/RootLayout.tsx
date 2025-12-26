@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { TwoPlayerProvider } from "../features/hangman/TwoPlayerContext";
+import { TwoPlayerProvider } from "../context/TwoPlayerContext";
 
 export function RootLayout() {
   return (

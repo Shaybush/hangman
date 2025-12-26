@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useTwoPlayerContext } from '../TwoPlayerContext';
+import { useTwoPlayerContext } from '../context/TwoPlayerContext';
 import styles from './TwoPlayerSetup.module.css';
 
 export function TwoPlayerSetup() {

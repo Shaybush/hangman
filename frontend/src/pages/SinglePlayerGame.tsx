@@ -1,16 +1,21 @@
 import { useEffect } from 'react';
-import { useHangmanGame } from '../useHangmanGame';
+import { useNavigate } from 'react-router';
+import { useHangmanGame } from '../hooks/useHangmanGame';
+import { useKeyboardInput } from '../hooks/useKeyboardInput';
 import { HangmanVisual } from '../components/HangmanVisual';
 import { WordDisplay } from '../components/WordDisplay';
 import { LetterKeyboard } from '../components/LetterKeyboard';
 import { UsedLetters } from '../components/UsedLetters';
 import { AttemptsDisplay } from '../components/AttemptsDisplay';
-import styles from './HangmanGame.module.css';
+import { GameOverModal } from '../components/GameOverModal';
+import styles from './SinglePlayerGame.module.css';
 
-export function HangmanGame() {
+export function SinglePlayerGame() {
+  const navigate = useNavigate();
   const {
     gameState,
     isLoading,
+    isGuessing,
     error,
     startGame,
     makeGuess,
@@ -23,10 +28,22 @@ export function HangmanGame() {
     startGame();
   }, [startGame]);
 
-  const handleNewGame = () => {
+  const handlePlayAgain = () => {
     resetGame();
     startGame();
   };
+
+  const handleReturnToMenu = () => {
+    navigate("/hangman");
+  };
+
+  const isGameOver = gameState.gameStatus !== 'playing';
+
+  // Enable keyboard input when game is active and not guessing
+  useKeyboardInput({
+    onKeyPress: makeGuess,
+    disabled: isGameOver || isLoading || isGuessing
+  });
 
   if (isLoading) {
     return (
@@ -39,11 +56,10 @@ export function HangmanGame() {
   if (error) {
     return (
       <div className={styles.errorContainer}>
-        <p>{error}</p>
+        <p className={styles.errorMessage}>{error}</p>
         <button 
-          onClick={handleNewGame}
+          onClick={handlePlayAgain}
           className="btn btn-primary"
-          style={{ marginTop: '20px' }}
         >
           Try Again
         </button>
@@ -51,13 +67,12 @@ export function HangmanGame() {
     );
   }
 
-  const isGameOver = gameState.gameStatus !== 'playing';
   const remainingAttempts = gameState.maxAttempts - gameState.wrongGuesses;
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>
-        Hangman Game
+        Single Player
       </h1>
 
       <HangmanVisual wrongGuesses={gameState.wrongGuesses} />
@@ -83,27 +98,24 @@ export function HangmanGame() {
             usedLetters={gameState.usedLetters}
             correctLetters={gameState.revealedLetters}
             onGuess={makeGuess}
-            disabled={isGameOver}
+            disabled={isGameOver || isGuessing}
           />
 
-          {isGameOver && (
-            <div className={styles.gameOverContainer}>
-              <h2 className={`${styles.gameOverTitle} ${gameState.gameStatus === 'won' ? styles.titleWon : styles.titleLost}`}>
-                {gameState.gameStatus === 'won' ? 'You Won!' : 'Game Over!'}
-              </h2>
-              <p className={styles.wordReveal}>
-                The word was: <strong>{gameState.word}</strong>
-              </p>
-              <button
-                onClick={handleNewGame}
-                className="btn btn-primary"
-              >
-                New Game
-              </button>
+          {isGuessing && (
+            <div className={styles.checkingIndicator}>
+              Checking...
             </div>
           )}
         </>
       )}
+
+      <GameOverModal
+        isOpen={isGameOver}
+        isWin={gameState.gameStatus === 'won'}
+        word={gameState.word}
+        onPlayAgain={handlePlayAgain}
+        onReturnToMenu={handleReturnToMenu}
+      />
     </div>
   );
 }

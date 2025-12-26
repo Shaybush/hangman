@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
-import type { TwoPlayerState, Player } from './types';
+import type { TwoPlayerState, Player } from '../types';
 
 interface TwoPlayerContextValue {
   state: TwoPlayerState;

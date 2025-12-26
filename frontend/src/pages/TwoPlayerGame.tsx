@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useHangmanGame } from '../useHangmanGame';
-import { useKeyboardInput } from '../useKeyboardInput';
-import { useTwoPlayerContext } from '../TwoPlayerContext';
+import { useHangmanGame } from '../hooks/useHangmanGame';
+import { useKeyboardInput } from '../hooks/useKeyboardInput';
+import { useTwoPlayerContext } from '../context/TwoPlayerContext';
 import { HangmanVisual } from '../components/HangmanVisual';
 import { WordDisplay } from '../components/WordDisplay';
 import { LetterKeyboard } from '../components/LetterKeyboard';
