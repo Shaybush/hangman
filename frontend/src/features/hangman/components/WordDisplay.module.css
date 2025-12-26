@@ -1,0 +1,9 @@
+.container {
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 8px;
+  text-align: center;
+  margin: 20px 0;
+  font-family: monospace;
+  color: var(--color-text);
+}

@@ -1,13 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import cookieParser from 'cookie-parser';
 import healthRoutes from './routes/health';
 import hangmanRoutes from './routes/hangman';
-import { logRequest } from './utils/logger';
+import logger, { logRequest } from './utils/logger';
 import { errorHandler, notFoundHandler } from './middlewares/errorHandler';
 import { env, logEnvStatus } from './config/env';
-import { handleDatabaseDisconnect, checkDatabaseConnection } from './config/database';
-import logger from './utils/logger';
 import helmet from 'helmet';
 
 const app: express.Application = express();
@@ -22,7 +19,6 @@ app.use(cors({
   credentials: true, // Allow cookies to be sent
 }));
 app.use(express.json());
-app.use(cookieParser()); // Parse cookies
 app.use(logRequest); // Log all requests
 
 // Health routes (public)
@@ -35,15 +31,9 @@ app.use('/api/hangman', hangmanRoutes);
 app.use(notFoundHandler); // Handle 404s
 app.use(errorHandler); // Handle all other errors
 
-// Start server with database connection check
+// Start server
 const startServer = async () => {
   try {
-    // Check database connection
-    const dbConnected = await checkDatabaseConnection();
-    if (!dbConnected) {
-      logger.error('Failed to connect to database. Server not started.');
-      process.exit(1);
-    }
 
     const server = app.listen(port, () => {
       logger.info(`🚀 Server is running on port ${port}`, {
@@ -64,9 +54,6 @@ const startServer = async () => {
 
       server.close(async () => {
         logger.info('HTTP server closed.');
-
-        // Disconnect from database
-        await handleDatabaseDisconnect();
 
         logger.info('Graceful shutdown completed.');
         process.exit(0);

@@ -43,13 +43,6 @@ export const logEnvStatus = (): void => {
         meta: {
             NODE_ENV: env.NODE_ENV,
             PORT: env.PORT,
-            DATABASE_URL: env.DATABASE_URL ? 'Set ✅' : 'Not set ❌',
-            OPENAI_API_KEY: env.OPENAI_API_KEY ? 'Set ✅' : 'Not set ❌',
-            ANTHROPIC_API_KEY: env.ANTHROPIC_API_KEY ? 'Set ✅' : 'Not set ❌',
-            GOOGLE_API_KEY: env.GOOGLE_API_KEY ? 'Set ✅' : 'Not set ❌',
-            MISTRAL_API_KEY: env.MISTRAL_API_KEY ? 'Set ✅' : 'Not set ❌',
-            CLERK_SECRET_KEY: env.CLERK_SECRET_KEY ? 'Set ✅' : 'Not set ❌',
-            CLERK_PUBLISHABLE_KEY: env.CLERK_PUBLISHABLE_KEY ? 'Set ✅' : 'Not set ❌',
         }
     });
 }; 

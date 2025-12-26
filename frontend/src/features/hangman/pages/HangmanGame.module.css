@@ -1,0 +1,48 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 30px;
+}
+
+.loadingContainer {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.5rem;
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 40px;
+  color: var(--color-error);
+}
+
+.gameOverContainer {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.gameOverTitle {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.titleWon {
+  color: var(--color-success);
+}
+
+.titleLost {
+  color: var(--color-error);
+}
+
+.wordReveal {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--color-text-light);
+}
