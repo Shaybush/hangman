@@ -1,4 +1,23 @@
 .container {
   margin: 20px auto;
   display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    margin: 15px auto;
+    width: 180px;
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 10px auto;
+    width: 150px;
+    height: 150px;
+  }
 }

@@ -41,3 +41,33 @@
   color: var(--color-text-light);
   opacity: 0.7;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    max-width: 420px;
+    margin: 15px auto;
+  }
+
+  .button {
+    width: 35px;
+    height: 35px;
+    margin: 3px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 340px;
+    margin: 10px auto;
+  }
+
+  .button {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    font-size: 0.8rem;
+    border-width: 1px;
+  }
+}

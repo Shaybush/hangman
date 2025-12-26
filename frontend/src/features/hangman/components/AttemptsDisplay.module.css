@@ -35,3 +35,36 @@
   height: 100%;
   transition: all 0.3s ease;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    max-width: 350px;
+    margin: 15px auto;
+  }
+
+  .text {
+    font-size: 1.1rem;
+  }
+
+  .progressBarContainer {
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 300px;
+    margin: 12px auto;
+  }
+
+  .text {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .progressBarContainer {
+    height: 16px;
+    border-width: 1px;
+  }
+}

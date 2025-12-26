@@ -21,7 +21,11 @@ export function HangmanVisual({ wrongGuesses }: HangmanVisualProps) {
   ];
 
   return (
-    <svg width="200" height="200" className={styles.container}>
+    <svg 
+      viewBox="0 0 200 200" 
+      preserveAspectRatio="xMidYMid meet"
+      className={styles.container}
+    >
       {/* Gallows base */}
       <line x1="10" y1="180" x2="70" y2="180" stroke="#8B4513" strokeWidth="4" />
       {/* Gallows pole */}

@@ -36,3 +36,46 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .buttonGroup {
+    max-width: 280px;
+  }
+
+  .buttonGroup a {
+    font-size: 1.1rem;
+    padding: 0.9rem 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .buttonGroup {
+    max-width: 260px;
+    gap: 1rem;
+  }
+
+  .buttonGroup a {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}

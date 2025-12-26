@@ -47,3 +47,57 @@
     opacity: 0.5;
   }
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .loadingContainer {
+    padding: 30px;
+    font-size: 1.2rem;
+  }
+
+  .errorContainer {
+    padding: 30px;
+  }
+
+  .errorMessage {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .loadingContainer {
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  .errorContainer {
+    padding: 20px;
+  }
+
+  .errorMessage {
+    font-size: 1rem;
+  }
+
+  .checkingIndicator {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
