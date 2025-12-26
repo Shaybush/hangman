@@ -1,0 +1,17 @@
+{
+  "git.closeDiffOnOperation": true,
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 0,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": false,
+  "editor.mouseWheelZoom": false,
+  "editor.multiCursorModifier": "alt",
+  "css.lint.unknownProperties": "ignore",
+  "css.lint.unknownAtRules": "ignore",
+  "files.exclude": {
+    "**/.git": false
+  },
+  "explorer.compactFolders": false,
+  "python.defaultInterpreterPath": "${workspaceFolder}/server/.venv/bin/python3",
+  "python.terminal.activateEnvironment": false
+}

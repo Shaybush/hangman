@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import healthRoutes from './routes/health';
+import hangmanRoutes from './routes/hangman';
 import { logRequest } from './utils/logger';
 import { errorHandler, notFoundHandler } from './middlewares/errorHandler';
 import { env, logEnvStatus } from './config/env';
@@ -26,6 +27,9 @@ app.use(logRequest); // Log all requests
 
 // Health routes (public)
 app.use('/api/health', healthRoutes);
+
+// Hangman game routes (public)
+app.use('/api/hangman', hangmanRoutes);
 
 // Error handling
 app.use(notFoundHandler); // Handle 404s

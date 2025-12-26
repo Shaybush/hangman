@@ -1,0 +1,10 @@
+[
+  {
+    "key": "Mouse4",
+    "command": "workbench.action.navigateBack"
+  },
+  {
+    "key": "Mouse5",
+    "command": "workbench.action.navigateForward"
+  }
+]
